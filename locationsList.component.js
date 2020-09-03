@@ -1,104 +1,77 @@
-// import React, { Component } from 'react'
-// import { Link } from 'react-router-dom';
-import React from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 
-class LocationsList extends React.Component {
+class LocationsList extends Component {
+  state = { 
+    name: ' ',
+    indoors:  Boolean,
+    website: '', 
+    location: Object,
+    category: ' ',
+    familyFriendly: Boolean,
+    description: ' ',
+    imageUrl: ' ',
+    locations: [] 
+  }
 
-    state = {
-name: " ",
-description: ' ',
-website: ' ',
-imageUrl: ' ',
-location: ' ',
-address: ' ',
-city: ' ',
-destinationState: ' ',
-posts: []
-    };
+componentDidMount(){
+  this.getLocationPost();
+}
 
-    componentDidMount = () => {
-        this.getLocationPost();
-      };
-    
+getLocationPost() {
+    axios.get('http://localhost:5000/all-locations')
+   .then((res) => {
+     const data = res.data;
+      console.log(res.data)
 
-getLocationPost = () => {
-    axios.get('/all-locations')
-    .then((response) => {
-        const data = response.data;
-        console.log(response.data)
-        this.setState({ posts: data });
-        console.log('data from locations has been recieved');
-    })
-    .catch(() => {
-        alert('Error retrieving data!!!');
+     this.setState({locations: data})
+     console.log('data dun did got');
+  })
+    .catch((err) => {
+      alert('error ABANDON SHIP!!!')
     });
   }
-  
-  //do i need this?
-//   handleChange = ({ target }) => {
-//     const { name, value } = target;
-//     this.setState({ [name]: value });
-//   };
+
+  displayLocationPosts = (locations) => {
+    if (!locations.length) return null;
+    return locations.map((destination, index) => {
+        return(
+
+// possibly add options to sort by family friendly, category, indoors
 
 
 
-  submit = (event) => {
-    event.preventDefault();
+      <div key={index} className="theLocations">
+         <div className="yellowEdge"></div>
+         
+         <div className= "innerContents">
+           <div className="scroll">
+        <h2>{destination.name.toUpperCase() } </h2>
+      
+        <hr />
+        {/* <h6>CATEGORY [ {destination.category} ] </h6>
+        <h5>CATEGORY {destination.category} </h5>
+        <h6>FAMILY FRIENDLY?: {destination.familyFriendly} </h6>
+        <h6>INDOORS?: {destination.indoors} </h6> */}
+        <br />
+        <p>{destination.description}</p>
+        <a href= "{destination.website}"> visit website</a>
+        </div>
+</div>
+<div className="imageDiv"> <img src=  {destination.imageUrl}  /> </div>
+      </div>
 
-    const payload = {
-      title: this.state.name,
-      body: this.state.description
-    };
-
-
-    axios({
-      url: '/all-locations/save',
-      method: 'POST',
-      data: payload
-    })
-      .then(() => {
-        console.log('Data has been sent to the server');
-        this.resetUserInputs();
-        this.getLocationPost();
-      })
-      .catch(() => {
-        console.log('Internal server error');
-      });;
-  };
-
-  resetUserInputs = () => {
-    this.setState({
-      name: '',
-      description: ''
+      
+        )
     });
   };
 
-  displayLocationPost = (posts) => {
-
-    if (!posts.length) return null;
-
-
-    return posts.map((post, index) => (
-      <div key={index} className="post__display">
-        <h3>{post.name}</h3>
-        <p>{post.description}</p>
-      </div>
-    ));
-  };
-
-  render() {
-
-    console.log('State: ', this.state);
-
-    //JSX
-    return(
-     
-
-        <div className="display">
-          {this.displayLocationPost(this.state.posts)}
-        </div>
-      
+  render() { 
+    
+    return (  
+      <div > 
+        {this.displayLocationPosts(this.state.locations)}
+         </div>
     );
   }
 }
@@ -106,35 +79,3 @@ getLocationPost = () => {
 export default LocationsList;
 
 
-
-
-
-// export default class LocationsList extends Component {
-//     constructor(props) {
-//         super(props);
-
-// this.state = {touristdestinations: []};
-
-//     }
-    
-//     componentDidMount() {
-//         axios.get('http://localhost:5000/all-locations')
-//             .then(response => {
-//             this.setState({touristdestinations: response.data})
-// })
-// .catch((error) => {
-//     console.log(error);
-// })
-// }
-
-    
-//     render() {
-//         return (
-//             <div className="theLocations">
-//                 <h2> Placeholder </h2>
-// <p> This is where the list will be </p>
-
-//                 </div>
-//         )
-//     }
-// }
