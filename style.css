@@ -7,7 +7,6 @@
 } */
 
 
-
 #bannerWrapper{
   position: relative;
   text-align: center;
@@ -99,7 +98,8 @@ ul li {
 
 
 .yellowText {
-  color: yellow;
+  text-transform: uppercase;
+  color: hsl(45, 100%, 51%);
 }
 
 h2 {
@@ -111,13 +111,25 @@ h2 {
 }
 
 .footText {
-  text-shadow: 1px 1px 3px white;
   bottom: 0px;
   margin-top: 80px;
 }
 
+.footText p {
+  padding-bottom: -20px;
+  padding-top: -20px;
+}
+
+.footerFix {
+ 
+background-color: red; 
+width: 100%;
+height: 20px;
+}
+
+
 .layoutPageBody{
-  background-color: #f0f0f0; 
+  /* background-color: #f0f0f0;  */
   width: 100%;
   height: 100vh;
   padding-left: 80px;
@@ -136,7 +148,8 @@ html{
   background: white;
 }
 .layoutFooter{
-  background-color: hsl(199, 40%, 51%);
+  /* background-color: hsl(199, 40%, 51%); */
+background-color: rgb(54,54,54);
   width: 100%;
   height: 35vh;
   background-image: url('./assets/skybottom.png');
@@ -210,6 +223,7 @@ html{
   /* position:fixed; */
 }
 
+
 .whiteText {
   color: white;
 }
@@ -230,7 +244,6 @@ a:visited {
 
 a:hover {
   text-decoration: none;
-  color: brown;
   
 }
 
@@ -282,15 +295,22 @@ a:active {
   /* float: left; */
     overflow: hidden;
     height: 400px;
-
   width: 100%;
+  
 }
 
-.theLocations h2 {
+.container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* .theLocations h2 h5 h6 p hr{
+  margin-right: 20px;
   font-weight: bold;
-  display: block;
-}
-
+  float: left;
+  background-color: red;
+} */
 
 .theLocations img {
   /* min-height: 100%; */
@@ -298,33 +318,71 @@ width: 50vw;
 padding-left: 40px;
 }
 
-.theLocations hr {
+.theLocations h2 {
   margin: 20px;
-  border-top: 5px solid black;
-  display: block;
+  flex: left;
+  border-bottom: 5px solid black;
+  /* display: block; */
 
 }
 
+.theLocations img{
+  height: 100%;
+}
+
 .theLocations a {
-  color: blue;
+  color: black;
   font-weight: bold;
 }
 
 .innerContents {
   /* background-color: blue; */
-  padding: 20px;
-  padding-left: 40px;
+  /* padding-top: 10px; */
+  /* padding-bottom: 20px; */
+  padding-left: 20px;
+  padding-right: 20px;
   /* margin: -20; */
 width: 50%;
+/* background-color: red; */
   float: left;
+  display: grid;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  grid-template-columns: 95%;
 }
 
 .scroll {
+  height: 400px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+overflow-y: auto;
+  width: 110%;
 }
+
+/* #grid {
+  background-color: green;
+  display: grid;
+  padding: 20px;
+  grid-column-gap: 20px;
+  grid-row-gap: 10px;
+  grid-template-columns: 200px;
+} */
+
+.grid-item {
+overflow: hidden;
+  /* background-color: blue; */
+  padding-right: 20px;
+} 
+
+
+
+
 
 .imageDiv{
   overflow: hidden;
-  margin: -20px;
+  margin: 0px;
+  height: 100vh;
+  width: auto;
   /* margin-right: -40px; */
 
 }
@@ -332,7 +390,7 @@ width: 50%;
   /* background-color: green; */
   /* width: 50%; */
   height: 50%;
-
+margin-left: 20px;
   float: right;
 }
 
@@ -347,7 +405,7 @@ width: 50%;
 } 
 
 .pageHeading{
-  margin-top: 10px;
+  margin-top: 20px;
   margin-bottom: 50px;
 }
 
@@ -384,3 +442,10 @@ width: 50%;
   justify-content: space-between;
     } */
   
+.layout404 img{
+  width: 50vw;
+}
+
+.layout404{
+  margin: 20px;
+}

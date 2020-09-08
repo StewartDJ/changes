@@ -1,99 +1,53 @@
-const express = require("express");
-// const morgan = require("morgan");
-const app = express();
-const mongoose = require("mongoose");
-const TouristDestination = require("./models/addLocations.models");
+import React from 'react';
+import "bootstrap/dist/css/bootstrap.min.css"
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Navbar from "./components/navbar";
+import addLocations from "./components/addLocations";
+import allLocations from "./components/allLocations";
+import Home from "./components/Home";
+import Footer from "./components/Footer";
+import contacts from "./components/contacts";
+import categoryArt from "./components/categoryArt";
+import categoryPlay from "./components/categoryPlay";
+import categoryView from './components/categoryView';
+import categoryShop from './components/categoryShop';
+import categoryLearn from './components/categoryLearn';
+import categorySkate from './components/categorySkate';
+import PageNotFound from './components/404'
 
-//new toss if brokeen 
-// const routes = require('./routes/api');
-// //new toss if brokeen 
-
-
-const dbURI =
-  "mongodb+srv://capstone:12345@cluster0.gdfnt.mongodb.net/Capstone?retryWrites=true&w=majority";
-
-mongoose
-  .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then((result) => app.listen(5000))
-  .catch((err) => console.log(err));
-
-  //new toss if brokeen 
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
-//new toss if brokeen 
+import './style.css';
 
 
 
 
-//This chunk of code saves to the database
+function App() {
+  return (
+    <BrowserRouter>
+    <div className="pageContain">
+    <Navbar />
+    <Switch>
+    <Route exact path='/' component={Home} />
+    <Route path='/addLocations' component={addLocations} />
+    <Route path='/allLocations' component={allLocations} />
+    <Route path='/contacts' component={contacts} />
+    
+    <Route path='/categoryArt' component={categoryArt} />
+    <Route path='/categoryPlay' component={categoryPlay} />
+    <Route path='/categoryView' component={categoryView} />
+    <Route path='/categoryShop' component={categoryShop} />
+    <Route path='/categoryLearn' component={categoryLearn} />
+    <Route path='/categorySkate' component={categorySkate} />
+    <Route path="*" component={PageNotFound} />
+    
 
-app.get("/add-location", (req, res) => {
-  const location = new TouristDestination({
-    name: "test addition",
-    description: 'a place',
-  website: 'somewhere',
-  imageUrl: 'dunno',
-  location: 'jlkjl',
-  address: 'address',
-  city: 'address',
-  destinationState: 'address',
-  zipCode: 789,
-  });
-  location.save()
-  .then((result) => {
-    res.send(result)
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-});
+    </Switch>
+    <Footer />
+   
+      </div>
+  
+      </BrowserRouter>
 
-//this chunk of code gets from the database
-app.get("/all-locations", (req, res) => {
-  TouristDestination.find()
-  .then((result) => {
-    res.send(result)
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-})
-
-
-
-// new trash if broken
-// app.use(morgan('tiny'));
-app.use('/all-locations', TouristDestination);
-// app.listen(PORT, console.log(`Server is starting at ${PORT}`));
-//new trash if broken
-
-
-
-// //find a single blog
-// app.get("/single-location", (req, res) => {
-//   TouristDestination.findById(id)
-//   .then((result) => {
-//     res.send(result)
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
-// })
-
-// //routes, this sends to home page revise later
-// app.get('/',  (req, res) => {
-// res.redirect('/allLocations')
-// })
-
-
-// //location routes
-// app.get('/allLocations', (req, res) => {
-//   TouristDestination.find()
-//   .then((result) => {
-//     res.send(result)
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
-
-// })
+      
+  )
+}
+export default App;
